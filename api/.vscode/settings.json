@@ -1,0 +1,9 @@
+{
+    "editor.formatOnSave": false,
+    // Enable per-language
+    "[php]": {
+        "editor.formatOnSave": true
+    },
+    "search.useIgnoreFiles": false,
+    "php.suggest.basic": true
+}
