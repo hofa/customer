@@ -3,11 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Laravel\Lumen\Auth\Authorizable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class MerchantAccount extends Eloquent implements JWTSubject
+class MerchantAccount extends Eloquent implements JWTSubject, AuthorizableContract, AuthenticatableContract
 {
+    use Authenticatable, Authorizable;
+
     protected $collection = 'MerchantAccount';
 
     /**
@@ -16,7 +22,7 @@ class MerchantAccount extends Eloquent implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'username',
+        'status', 'username', 'merchantName', 'merchantShortName',
     ];
 
     /**
@@ -45,6 +51,6 @@ class MerchantAccount extends Eloquent implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return ['username'];
     }
 }

@@ -17,8 +17,26 @@ class Controller extends BaseController
     {
         return response()->json(array(
             'status' => 200,
-            'success' => false,
+            'success' => true,
             'data' => $data,
+            'tip' => $tip,
+        ), $httpCode);
+    }
+
+    /**
+     * 获取成功输出
+     * @param array $data
+     * @param string $tip
+     * @param int $httpCode
+     * @return mixed
+     */
+    public function table($total, $data = array(), $tip = '请求成功', $httpCode = 200)
+    {
+        return response()->json(array(
+            'status' => 200,
+            'success' => true,
+            'data' => $data,
+            'total' => $total,
             'tip' => $tip,
         ), $httpCode);
     }
