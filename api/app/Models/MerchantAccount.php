@@ -22,7 +22,9 @@ class MerchantAccount extends Eloquent implements JWTSubject, AuthorizableContra
      * @var array
      */
     protected $fillable = [
-        'status', 'username', 'merchantName', 'merchantShortName',
+        'status',
+        'username',
+        'merchantId',
     ];
 
     /**

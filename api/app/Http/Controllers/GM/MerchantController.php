@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\GM;
 
 use App\Http\Controllers\Controller;
+use App\Models\Merchant;
 use App\Models\MerchantAccount;
 use Illuminate\Http\Request;
 
@@ -34,10 +35,14 @@ class MerchantController extends Controller
             'merchantName' => 'required|min:2|max:100',
         ]);
 
-        $data = $request->only('username', 'password', 'merchantShortName', 'merchantName');
+        $data = $request->only('merchantShortName', 'merchantName');
+        $data['status'] = 'Normal';
+        $merchant = Merchant::create($data);
+
+        $data = $request->only('username', 'password');
+        $data['merchantId'] = $merchant->_id;
         $data['status'] = 'Normal';
         $data['password'] = app('hash')->make($data['password']);
-        // dd($data);
         MerchantAccount::create($data);
         return $this->success();
     }

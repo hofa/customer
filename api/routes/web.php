@@ -12,7 +12,10 @@
  */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    // return $router->app->version();
+    return view('tests/index.twig', ["test" => "ahah!"]);
 });
 
 $router->get('/test', 'ExampleController@test');
+
+$router->get('/ot', 'ExampleController@t2');

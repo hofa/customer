@@ -131,4 +131,6 @@ $app->register(\Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->configure('database');
+
+$app->register(LumenTwig\TwigServiceProvider::class);
 return $app;

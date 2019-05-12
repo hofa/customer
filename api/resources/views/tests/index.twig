@@ -43,7 +43,7 @@
             show_prompt();
         }
         // 登录
-        var login_data = '{"type":"login","client_name":"'+name.replace(/"/g, '\\"')+'","room_id":"<?php echo isset($_GET['room_id']) ? $_GET['room_id'] : 1?>"}';
+        var login_data = '{"type":"login","client_name":"'+name.replace(/"/g, '\\"')+'","room_id":"{{ request.input('room_id', 1) }}"}';
         console.log("websocket握手成功，发送登录数据:"+login_data);
         ws.send(login_data);
     }
@@ -84,6 +84,8 @@
                 say(data['from_client_id'], data['from_client_name'], data['from_client_name']+' 退出了', data['time']);
                 delete client_list[data['from_client_id']];
                 flush_client_list();
+            case 'online':
+                say(data['from_client_id'], data['from_client_name'], data['from_client_name']+'在线检查', data['time']);
         }
     }
 
@@ -174,7 +176,7 @@
                     </div>
                </form>
                <div>
-               &nbsp;&nbsp;&nbsp;&nbsp;<b>房间列表:</b>（当前在&nbsp;房间<?php echo isset($_GET['room_id'])&&intval($_GET['room_id'])>0 ? intval($_GET['room_id']):1; ?>）<br>
+               &nbsp;&nbsp;&nbsp;&nbsp;<b>房间列表:</b>（当前在&nbsp;房间{{ request.input('room_id', 1)}}）<br>
                &nbsp;&nbsp;&nbsp;&nbsp;<a href="/?room_id=1">房间1</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/?room_id=2">房间2</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/?room_id=3">房间3</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/?room_id=4">房间4</a>
                <br><br>
                </div>
@@ -208,5 +210,7 @@
           }
       });
     </script>
+
+    <p>{{ test }}</p>
 </body>
 </html>

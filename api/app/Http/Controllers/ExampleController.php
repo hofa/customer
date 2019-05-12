@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Libs\GatewayClient;
 use App\Models\GMAccount;
 use App\Models\Test;
 use DB;
@@ -18,7 +19,7 @@ class ExampleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:gm', ['except' => ['test']]);
+        $this->middleware('auth:gm', ['except' => ['test', 't2']]);
     }
 
     public function test(Request $request)
@@ -47,5 +48,14 @@ class ExampleController extends Controller
     {
         dd(JWTAuth::parseToken()->touser());
         return \response()->json(JWTAuth::parseToken()->touser());
+    }
+
+    public function t2(Request $request)
+    {
+        $new_message = array('type' => 'online', 'from_client_id' => 0, 'from_client_name' => '系统', 'time' => date('Y-m-d H:i:s'));
+        GatewayClient::sendToGroup(1, json_encode($new_message));
+        return response()->json([
+            'online' => GatewayClient::getClientCountByGroup(1),
+        ]);
     }
 }

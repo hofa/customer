@@ -1,5 +1,5 @@
 <?php
-namespace Libs;
+namespace App\Libs;
 
 use \Exception;
 
@@ -24,7 +24,7 @@ use \Exception;
 /**
  * 数据发送相关
  */
-class Gateway
+class GatewayClient
 {
     /**
      * gateway 实例

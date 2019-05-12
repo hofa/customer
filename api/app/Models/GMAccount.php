@@ -22,7 +22,8 @@ class GMAccount extends Eloquent implements JWTSubject, AuthorizableContract, Au
      * @var array
      */
     protected $fillable = [
-        'name', 'username',
+        'name',
+        'username',
     ];
 
     /**
