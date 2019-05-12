@@ -13,7 +13,12 @@
 
 $router->get('/', function () use ($router) {
     // return $router->app->version();
-    return view('tests/index.twig', ["test" => "ahah!"]);
+    return view('tests/user.twig', ["test" => "ahah!"]);
+});
+
+$router->get('/customer', function () use ($router) {
+    // return $router->app->version();
+    return view('tests/customer.twig', ["test" => "ahah!"]);
 });
 
 $router->get('/test', 'ExampleController@test');

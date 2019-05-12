@@ -43,7 +43,7 @@
             show_prompt();
         }
         // 登录
-        var login_data = '{"type":"login","client_name":"'+name.replace(/"/g, '\\"')+'","room_id":"{{ request.input('room_id', 1) }}"}';
+        var login_data = '{"merchant_id": "1", "user_id": "1", "type":"userLogin","client_name":"'+name.replace(/"/g, '\\"')+'","room_id":"{{ request.input('room_id', 1) }}"}';
         console.log("websocket握手成功，发送登录数据:"+login_data);
         ws.send(login_data);
     }
@@ -59,7 +59,7 @@
                 ws.send('{"type":"pong"}');
                 break;;
             // 登录 更新用户列表
-            case 'login':
+            case 'userLogin':
                 //{"type":"login","client_id":xxx,"client_name":"xxx","client_list":"[...]","time":"xxx"}
                 say(data['client_id'], data['client_name'],  data['client_name']+' 加入了聊天室', data['time']);
                 if(data['client_list'])
